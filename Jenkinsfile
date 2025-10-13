@@ -3,13 +3,13 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds') // Jenkins credential ID
-        IMAGE_NAME = "your-dockerhub-username/python-ci-cd"
+        IMAGE_NAME = "arunchintu/python-ci-cd"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/<your-username>/python-ci-cd-jenkins.git'
+                git 'https://github.com/arunchintu-1/python-ci-cd-jenkins.git'
             }
         }
 
@@ -45,4 +45,3 @@ pipeline {
         }
     }
 }
-
