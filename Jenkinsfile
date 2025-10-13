@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/arunchintu-1/python-ci-cd-jenkins.git'
+                git branch: 'main', url: 'https://github.com/arunchintu-1/python-ci-cd-jenkins.git'
             }
         }
 
