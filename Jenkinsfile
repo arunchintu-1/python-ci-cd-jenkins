@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "arunchintu-1/python-ci-cd"
+        IMAGE_NAME = "arunchintu/python-ci-cd"
     }
 
     stages {
