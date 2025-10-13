@@ -1,19 +1,16 @@
 pipeline {
-    agent any
-
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')  // Your Jenkins DockerHub credentials ID
-        IMAGE_NAME = "arunchintu-1/python-ci-cd"                 // Replace with your Docker Hub username/repo
+    agent {
+        docker { image 'python:3.12-slim' }
     }
-
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
+        IMAGE_NAME = "arunchintu-1/python-ci-cd"
+    }
     stages {
-
         stage('Build') {
             steps {
-                echo "=== Creating Virtual Environment & Installing Dependencies ==="
+                echo "=== Installing Python dependencies inside Docker ==="
                 sh '''
-                    apt-get update -y
-                    apt-get install -y python3-venv python3-pip
                     python3 -m venv venv
                     . venv/bin/activate
                     pip install --upgrade pip
@@ -52,11 +49,7 @@ pipeline {
     }
 
     post {
-        success {
-            echo "✅ Pipeline completed successfully!"
-        }
-        failure {
-            echo "❌ Pipeline failed. Check logs for details."
-        }
+        success { echo "✅ Pipeline completed successfully!" }
+        failure { echo "❌ Pipeline failed. Check logs." }
     }
 }
